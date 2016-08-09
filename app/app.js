@@ -314,7 +314,7 @@
                     var _execute = function() {
                         var iframe = document.createElement('iframe');
                         receiveMessage(messageChannel, iframe);
-                        iframe.setAttribute('sandbox', 'allow-scripts allow-popups allow-same-origin');
+                        iframe.setAttribute('sandbox', 'allow-scripts allow-popups allow-forms allow-same-origin');
                         iframe.setAttribute('scrolling', 'no');
                         iframe.setAttribute('style', 'visibility:hidden;');
                         defSettings.src = defSettings.url + '#' + encodeURIComponent(document.location.href);
