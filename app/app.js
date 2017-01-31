@@ -1,19 +1,19 @@
 (function() {
+    'use strict';
     return {
         initialize: function() {
-            (function($) {
+            (function(window,$) {
                 // please enter your site name here.
-                var widget = '<div class="widget clearfix inactive" id="cb-plugin-box"> <h3>Subscription Details</h3> <div class="content"> <span id="loading" class="sloading loading-small loading-block loading-align" style="display: none"></span> <div class="cb-widget--box"> <div class="cb-widget--error" id="error" style="display: none;"> <h6>Sorry, we\'ve got nothing!</h6> <hr>Looks like your Chargebee account doesn\'t have a customer with this email address.</div> <div class="cb-widget--error" id="request-error" style="display: none;">Sorry, something went wrong. Please try after some time.</div> <div class="cb-widget--error" id="role-error" style="display: none;">You don\'t have permission to view these details. If you\'d like to view the details, request your admin for access.</div> <div class="cb-widget--login" style="display: none;" id="login-container">To view the details, you must first log into your Chargebee account. <br> <br> <a class="cb-widget--button" id="login-trigger" href="" target="_blank">Log into Chargebee</a> </div> </div> <div id="iframeplaceholder"> </div> <div id="authentication" style="display: none;"> </div> </div> </div>';
-                var siteName = '';
+                var widget = '<div class="widget clearfix inactive" id="cb-plugin-box"> <h3>Subscription Details</h3> <div class="content"> <span id="loading" class="sloading loading-small loading-block loading-align" style="display: none"></span> <div class="cb-widget--box"> <div class="cb-widget--error" id="error" style="display: none;"> <h6>Sorry, we have got nothing!</h6> <hr>Looks like your Chargebee account doesnot have a customer with this email address.</div> <div class="cb-widget--error" id="request-error" style="display: none;">Sorry, something went wrong. Please try after some time.</div> <div class="cb-widget--error" id="role-error" style="display: none;">You dont have permission to view these details. If youd like to view the details, request your admin for access.</div> <div class="cb-widget--login" style="display: none;" id="login-container">To view the details, you must first log into your Chargebee account. <br> <br> <a class="cb-widget--button" id="login-trigger" href="" target="_blank">Log into Chargebee</a> </div> </div> <div id="iframeplaceholder"> </div> <div id="authentication" style="display: none;"> </div> </div> </div>';
                 var email = domHelper.ticket.getContactInfo().user.email;
-                var sandbox = false;
+                var sandbox = true;
                 var detailsCardLoaded = false;
                 var requestTimeOut = null;
                 var noDetails = false;
                 var placeWidget = '{{iparam.add_widget}}';
                 var _sumPath = '/freshplug/details_card?customer_email=';
                 var _authPath = '/freshplug/session_active_auth';
-                var cbPath, detailsUrl, checkUrl, attempt = 0;
+                var cbPath, detailsUrl, checkUrl;
                 $(document).ready(function() {
                     addWidgetToDom(placeWidget, jQuery(widget));
                     $('#cb-plugin-box').parents('.widget').removeClass('widget');
@@ -49,7 +49,7 @@
                 function _execute() {
                     var _env = {
                         site: 'app',
-                        hostSuffix: '.chargebee.com',
+                        hostSuffix: '.localcb.in:8443',
                         protocol: "https"
                     };
                     $('#loading').show();
@@ -70,14 +70,14 @@
                         },
                         onSuccess: function(iframe, message) {
                             clearTimeout(requestTimeOut);
-                            if (message !== 'role_failure') {
+                              if (message !== 'role_failure') {
                                 loadSummary();
                             } else {
                                 $('#loading').hide();
                                 handleCBWidget($('#role-error'));
                             }
                         },
-                        onCancel: function(iframe) {
+                        onCancel: function() {
                             clearTimeout(requestTimeOut);
                             login();
                         }
@@ -96,14 +96,14 @@
                             iframe.setAttribute('style', 'border:none;overflow:hidden;width:100%;height:' + height + 'px;');
                             $('#iframeplaceholder').attr('style', 'height:' + h + 'px;');
                         },
-                        onSuccess: function(iframe, message) {
+                        onSuccess: function() {
                             clearTimeout(requestTimeOut);
                             $('#iframeplaceholder').removeAttr('style').slideDown(200);
                             $('.cb-widget--box').hide();
                             $('#loading').hide();
                             detailsCardLoaded = true;
                         },
-                        onCancel: function(iframe) {
+                        onCancel: function() {
                             clearTimeout(requestTimeOut);
                             $('#loading').hide();
                             handleCBWidget($('#error'));
@@ -120,7 +120,7 @@
                             addErrorHandler(iframe);
                             $('#authentication').html(iframe).hide();
                         },
-                        onLoad: function(iframe, width, height) {
+                        onLoad: function() {
                             clearTimeout(requestTimeOut);
                         },
                         onSuccess: function(iframe, message) {
@@ -132,7 +132,7 @@
                                 handleCBWidget($('#role-error'));
                             }
                         },
-                        onCancel: function(iframe) {
+                        onCancel: function() {
                             if (poll > 20) {
                                 $('#loading').hide();
                                 poll = 0;
@@ -162,7 +162,7 @@
                     });
                 }
 
-                function addErrorHandler(iframe) {
+                function addErrorHandler() {
                     requestTimeOut != null ? clearTimeout(requestTimeOut) : void 0;
                     requestTimeOut = setTimeout(function() {
                         $('#iframeplaceholder').empty();
@@ -198,10 +198,10 @@
                     var intervalId,
                         lastHash,
                         attachedCallback,
-                        lastAttachedCallback,
-                        window = this;
+                        lastAttachedCallback;
+                        // window = this;
 
-                    handleCallback = function() {
+                    var handleCallback = function() {
                         var scopeArgs = arguments[0];
                         var allCallbacks = arguments[1];
                         var callBacks = arguments[2];
@@ -216,7 +216,7 @@
                         if (window['postMessage']) {
                             if (callback) {
                                 attachedCallback = function(e) {
-                                    if ((typeof e.origin === null && e.source === iframe.contentWindow)) {
+                                    if (typeof e.origin === null && e.source === iframe.contentWindow) {
                                         return false;
                                     }
                                     callback(e);
@@ -333,7 +333,7 @@
                         }
                     };
                 })();
-            }).call(window, jQuery);
+            }).call(window, window, jQuery);
         }
-    }
+    };
 })();
