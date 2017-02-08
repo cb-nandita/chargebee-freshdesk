@@ -49,7 +49,7 @@
                 function _execute() {
                     var _env = {
                         site: 'app',
-                        hostSuffix: '.devcb.in',
+                        hostSuffix: '.stagingcb.com',
                         protocol: "https"
                     };
                     $('#loading').show();
