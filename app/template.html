@@ -1,45 +1,22 @@
-<style media="screen">
-    .cb-widget--button {
-        color: #FFF;
-        text-decoration: none;
-        text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-        background-color: #373737;
-        background-image: -moz-linear-gradient(top, #444, #222);
-        background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#444), to(#222));
-        background-image: -webkit-linear-gradient(top, #444, #222);
-        background-image: -o-linear-gradient(top, #444, #222);
-        background-image: linear-gradient(to bottom, #444, #222);
-        background-repeat: repeat-x;
-        border-color: #222 #222 #000;
-        border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-        padding: 4px 20px;
-        font-size: 13px;
-        line-height: 16px;
-        font-weight: bold;
-        border-radius: 4px;
-        -moz-border-radius: 4px;
-        -webkit-border-radius: 4px;
-    }
-
-    .cb-widget--box {
-        text-align: center;
-        padding: 20px 0;
-        position: relative;
-    }
-
-    .cb-widget--error,
-    .cb-widget--error * {
-        color: #AAA;
-    }
-
-    .cb-widget--error hr {
-        width: 30px;
-        border: none;
-        border-top: 2px solid #AAA;
-        margin: 10px auto;
-    }
-
-    .cb-widget--button:hover {
-        color: #FFF;
-    }
-</style>
+<html>
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://static.freshdev.io/fdk/2.0/assets/fresh_client.js"></script>
+    <script src="app.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="https://static.freshdev.io/fdk/2.0/assets/freshdesk.css">
+  </head>
+  <body>
+    <div class="widget clearfix inactive" id="cb-plugin-box">
+        <div class="content">
+            <div class="cb-widget--box">
+                <div class="cb-widget--error" id="request-error" style="display: none;">
+                    Sorry, Something went wrong. Please try after some time.
+                </div>
+            </div>
+            <div id="iframeplaceholder">
+            </div>
+        </div>
+    </div>
+  </body>
+</html>
