@@ -1,0 +1,13 @@
+{
+  "add_widget": {
+    "display_name": "Add Chargebee Freshplug",
+    "description": "Choose where you'd want the Chargebee subscription details to be displayed.",
+    "type": "dropdown",
+    "required": true,
+    "options": [
+      "Place underneath the Requestor Info section",
+      "Place at the bottom of the right panel"
+    ],
+    "default_value": "Place underneath the Requestor Info section"
+  }
+}

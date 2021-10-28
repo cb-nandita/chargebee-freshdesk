@@ -1,0 +1,17 @@
+.cb-widget--box {
+       text-align: center;
+       padding: 20px 0;
+       position: relative;
+   }
+
+   .cb-widget--error,
+   .cb-widget--error * {
+       color: #AAA;
+   }
+
+   .cb-widget--error hr {
+       width: 30px;
+       border: none;
+       border-top: 2px solid #AAA;
+       margin: 10px auto;
+   }
