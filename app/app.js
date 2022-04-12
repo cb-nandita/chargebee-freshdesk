@@ -25,7 +25,7 @@ var pluginInit = function($) {
   function _execute(email) {
       var _env = {
           site: 'app',
-          hostSuffix: '.predev24.in',
+          hostSuffix: '.predev38.in',
           protocol: "https"
       };
       cbPath = _env.protocol + "://" + _env.site + _env.hostSuffix;
